@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx
+        </Property>
+        <Property name="PATH">/var/log/nsq/sample/</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="allAbove" fileName="${PATH}all.log"
+                     filePattern="${PATH}all-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <LevelRangeFilter minLevel="fatal" maxLevel="trace" onMatch="accept" onMismatch="deny"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="300"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Logger level="debug" name="com.github.cossbow" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="allAbove" level="trace"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="allAbove" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>
