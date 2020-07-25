@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %-d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] [%C:%L] - [%p] %m%n
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger level="info" name="com.github.cossbow" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger level="debug" name="com.github.cossbow.pubsub.NsqBaseTest" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger level="debug" name="com.github.cossbow.pubsub.NsqSnappyTest" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger level="debug" name="com.github.cossbow.pubsub.NsqTest" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>

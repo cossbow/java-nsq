@@ -1,0 +1,17 @@
+
+
+logging:
+  config: classpath:log4j2.xml
+
+
+mq:
+  nsq:
+    lookup-period-millis: 5000
+    default-attempt-limit: 1
+
+
+test:
+  type: 1
+  send-rate: 1000
+  concurrency: 1
+  batch-interval: 1000
