@@ -12,6 +12,6 @@ mq:
 
 test:
   type: 1
-  send-rate: 1000
+  send-rate: 2000
   concurrency: 1
-  batch-interval: 1000
+  batch-interval: 2000
